@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ypfweb</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/style/paper.min.css" />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EHZ8V74593"
+    ></script>
+    <script src="https://bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/dayjs.min.js"></script>
+    <style>
+      html,
+      body {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      h1 {
+        margin: 12px 0;
+      }
+      main {
+        position: relative;
+        width: 80vw;
+        margin: auto 10%;
+        height: calc(100vh - 50px);
+        overflow-y: auto;
+        top: 78px;
+        padding-bottom: 80px;
+      }
+      footer {
+        width: 100%;
+        position: fixed;
+        padding: 12px 0;
+        bottom: 0;
+        left: 0;
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="border fixed split-nav">
+      <div class="nav-brand">
+        <h3><a href="#">ypfweb</a></h3>
+      </div>
+      <div class="collapsible">
+        <input id="collapsible1" type="checkbox" name="collapsible1" />
+        <label for="collapsible1">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </label>
+        <div class="collapsible-body">
+          <ul class="inline">
+            <li><a href="/html/about.html" target="_blank">About</a></li>
+            <li>
+              <a
+                href="https://github.com/GitHubJiKe/ypfweb.club"
+                target="_blank"
+                >Github</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <template>
+        <div class="card margin">
+          <div class="card-body">
+            <h4 class="card-title">title</h4>
+            <h5 class="card-subtitle">subtitle</h5>
+            <div class="card-text">text</div>
+            <a class="paper-btn" target="_blank">阅读更多</a>
+          </div>
+        </div>
+      </template>
+    </main>
+    <footer class="text-center background-primary"></footer>
+    <script>
+      (() => {
+        document.querySelector(
+          "footer"
+        ).innerText = `©${new Date().getFullYear()} of Peter Yuan`;
+        const url = `${location.origin}/articles.json`;
+        fetch(url)
+          .then((res) => res.json())
+          .then((data) => {
+            const main = document.querySelector("main");
+            data
+              .sort((v1, v2) =>
+                dayjs(v2.date).isAfter(dayjs(v1.date)) ? 1 : -1
+              )
+              .forEach((article) => {
+                const card = document
+                  .querySelector("template")
+                  .content.cloneNode(true);
+                card.querySelector(".card-title").innerText = article.title;
+                card.querySelector(".card-subtitle").innerText =
+                  article.subtitle;
+                card.querySelector(".card-text").innerText = article.intro;
+                card.querySelector("a").href = `/html/${article.title}.html`;
+                main.appendChild(card);
+              });
+          });
+      })();
+      // google
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EHZ8V74593");
+    </script>
+  </body>
+</html>

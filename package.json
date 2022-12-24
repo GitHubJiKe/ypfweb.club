@@ -1,0 +1,33 @@
+{
+  "name": "ypfweb.club",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "convert": "node ./js/convert.js",
+    "start": "serve",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GitHubJiKe/ypfweb.club.git"
+  },
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "html-minifier": "^4.0.0",
+    "showdown": "^2.1.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GitHubJiKe/ypfweb.club/issues"
+  },
+  "homepage": "https://github.com/GitHubJiKe/ypfweb.club#readme",
+  "prettier": {
+    "tabWidth": 2
+  },
+  "devDependencies": {
+    "husky": "^7.0.0"
+  }
+}

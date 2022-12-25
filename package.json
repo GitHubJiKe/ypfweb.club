@@ -28,6 +28,6 @@
     "tabWidth": 2
   },
   "devDependencies": {
-    "husky": "^7.0.0"
+    "husky": "^8.0.2"
   }
 }

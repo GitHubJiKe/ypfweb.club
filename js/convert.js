@@ -72,6 +72,7 @@ async function doConvert() {
         content: htmlContent,
         title: metaData["title"],
         date: metaData["date"],
+        chart: metaData["chart"],
       }
     );
     await wf(htmlpath, minify(content, miniOpts));

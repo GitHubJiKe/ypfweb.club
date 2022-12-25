@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "convert": "node ./js/convert.js",
-    "start": "serve"
+    "start": "serve",
+    "commit": "npm run convert && git add ."
   },
   "repository": {
     "type": "git",

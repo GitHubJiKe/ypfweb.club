@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang=en><meta charset=UTF-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=date content="2022/12/25 11:40"><title>使用Chart.js</title><link rel=stylesheet href=/style/air.css><link rel=stylesheet href=//bucket2023.oss-cn-hangzhou.aliyuncs.com/css/highlight.agate.css><link rel="shortcut icon"href=/favicon.ico type=image/x-icon><script src=//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/chart.js></script><script async src="//www.googletagmanager.com/gtag/js?id=G-EHZ8V74593"></script><script src=//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/Valine.min.js></script><script src=//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/highlight.min.js></script><style>body,html{padding:0 12px;background-color:#eedeb0;background-image:url(https://bucket2023.oss-cn-hangzhou.aliyuncs.com/images/bg.texture.png)}h1{color:brown}.title::after{content:attr(data-date);display:block;font-size:.1rem;color:#777}.qrcodes{display:flex;gap:12px;margin:24px;justify-content:center}</style><h1 id=chartjs>使用 Chart.js</h1><h2 id=whatischartjs>What is Chart.js</h2><blockquote><p><a href=https://www.chartjs.org/ rel="noopener noreferrer"target=_blank>Chart.js</a> Simple yet flexible JavaScript charting library for the modern web</blockquote><h2 id=usechartjsinmarkdown>Use Chart.js in markdown</h2><canvas id=myChart></canvas><script>const ctx=document.getElementById("myChart");new Chart(ctx,{type:"bar",data:{labels:["Red","Blue","Yellow","Green","Purple","Orange"],datasets:[{label:"# of Votes",data:[12,19,3,5,2,3],borderWidth:1}]},options:{scales:{y:{beginAtZero:!0}}}})</script><h3 id=firststep>First Step</h3><pre><code class="javascript language-javascript">// in markdown file, add chart flag
+---
+title: xxx,
+subtitle: xxx,
+intro: xxx,
+chart: true // this line
+---</code></pre><h3 id=secondstep>Second Step</h3><pre><code class="javascript language-javascript">// modify convert code
+const content = await ejs.renderFile(
+  Path.resolve(__dirname, "./template.ejs"),
+  {
+    content: htmlContent,
+    title: metaData["title"],
+    date: metaData["date"],
+    chart: metaData["chart"], // this line
+  }
+);</code></pre><h3 id=thirdstep>Third Step</h3><pre><code class="javascript language-javascript">// use ejs to insert chart.js resource
+&lt;% if (chart) { %>
+&lt;script src="//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/chart.js">&lt;/script>
+&lt;% } %></code></pre><h3 id=finally>Finally</h3><pre><code class="html language-html">// write down chart.js code in markdown
+&lt;canvas id="myChart">&lt;/canvas>
+
+&lt;script>
+  const ctx = document.getElementById("myChart");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+      datasets: [
+        {
+          label: "# of Votes",
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+&lt;/script></code></pre><h2 id=demoshow>Demo Show</h2><blockquote><p>Pie Chart Demo</blockquote><canvas id=pieChart></canvas><script>const ctx2=document.getElementById("pieChart");new Chart(ctx2,{type:"pie",data:{labels:["Red","Blue","Yellow"],datasets:[{label:"My First Dataset",data:[300,50,100],backgroundColor:["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)"],hoverOffset:4}]}})</script><h3 id=code>Code</h3><pre><code class="html language-html">&lt;canvas id="pieChart">&lt;/canvas>
+
+&lt;script>
+  const ctx2 = document.getElementById("pieChart");
+  new Chart(ctx2, {
+    type: "pie",
+    data: {
+      labels: ["Red", "Blue", "Yellow"],
+      datasets: [
+        {
+          label: "My First Dataset",
+          data: [300, 50, 100],
+          backgroundColor: [
+            "rgb(255, 99, 132)",
+            "rgb(54, 162, 235)",
+            "rgb(255, 205, 86)",
+          ],
+          hoverOffset: 4,
+        },
+      ],
+    },
+  });
+&lt;/script></code></pre><p>感谢阅读<div class=qrcodes><img style=width:10rem;height:10rem src=https://bucket2023.oss-cn-hangzhou.aliyuncs.com/images/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg alt=支付宝 width=200 height=200> <img style=width:10rem;height:10rem src=https://bucket2023.oss-cn-hangzhou.aliyuncs.com/images/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE.jpg alt=微信收款 width=200 height=200></div><p style=text-align:center;font-size:smaller;color:#777>“觉得不错，买杯奶茶给作者吧”<div id=vcomments></div><script>(()=>{new Valine({el:"#vcomments",appId:"iYsqbsZ26zQeQBvytgFgR5bV-gzGzoHsz",appKey:"M9T21EKjPvtdxEvffOOMGsOK"});var e=document.getElementsByTagName("html")[0].getBoundingClientRect().width,t=document.getElementsByTagName("html")[0],t=(t.style.fontSize=375<e?"15.625px":e/24+"px",document.querySelector("h1"));function a(){dataLayer.push(arguments)}t.setAttribute("data-date",document.querySelector("meta[name='date']").getAttribute("content")),t.classList.add("title"),window.dataLayer=window.dataLayer||[],a("js",new Date),a("config","G-EHZ8V74593"),hljs.highlightAll()})()</script>

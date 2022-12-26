@@ -1,104 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="date" content="<%= date %>" />
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/style/air.css" />
-    <link
-      rel="stylesheet"
-      href="//bucket2023.oss-cn-hangzhou.aliyuncs.com/css/highlight.agate.css"
-    />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <% if (chart) { %>
-    <script src="//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/chart.js"></script>
-    <% } %>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="//www.googletagmanager.com/gtag/js?id=G-EHZ8V74593"
-    ></script>
-    <script src="//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/Valine.min.js"></script>
-    <script src="//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/highlight.min.js"></script>
-    <style>
-      html,
-      body {
-        padding: 0 12px;
-        background-color: #eedeb0;
-        background-image: url(https://bucket2023.oss-cn-hangzhou.aliyuncs.com/images/bg.texture.png);
-      }
-      h1 {
-        color: brown;
-      }
-      .title::after {
-        content: attr(data-date);
-        display: block;
-        font-size: 0.1rem;
-        color: #777;
-      }
-      .qrcodes {
-        display: flex;
-        gap: 12px;
-        margin: 24px;
-        justify-content: center;
-      }
-    </style>
-  </head>
-  <body>
-    <%- content %>
-    <div class="qrcodes">
-      <img
-        style="width: 10rem; height: 10rem"
-        src="https://bucket2023.oss-cn-hangzhou.aliyuncs.com/images/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg"
-        alt="支付宝"
-        width="200"
-        height="200"
-      />
-      <img
-        style="width: 10rem; height: 10rem"
-        src="https://bucket2023.oss-cn-hangzhou.aliyuncs.com/images/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE.jpg"
-        alt="微信收款"
-        width="200"
-        height="200"
-      />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="date" content="<%= date %>" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/style/air.css" />
+  <link rel="stylesheet" href="//bucket2023.oss-cn-hangzhou.aliyuncs.com/css/highlight.agate.css" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <% if (chart) { %>
+  <script src="//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/chart.js"></script>
+  <% } %>
+  <!-- Google tag (gtag.js) -->
+  <script async src="//www.googletagmanager.com/gtag/js?id=G-EHZ8V74593"></script>
+  <script src="//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/Valine.min.js"></script>
+  <script src="//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/highlight.min.js"></script>
+  <style>
+    html,
+    body {
+      padding: 0 12px;
+      background-color: #eedeb0;
+      background-image: url(https://bucket2023.oss-cn-hangzhou.aliyuncs.com/images/bg.texture.png);
+    }
+
+    h1 {
+      color: brown;
+    }
+
+    .title::after {
+      content: attr(data-date);
+      display: block;
+      font-size: 0.1rem;
+      color: #777;
+    }
+
+    .qrcodes {
+      display: flex;
+      gap: 12px;
+      margin: 24px;
+      justify-content: center;
+    }
+
+
+    .modal-mask {
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-mask>img {
+      width: 80%;
+      height: 60%;
+      margin: 15% auto;
+      padding: 20px;
+      background-color: #fff;
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      color: #fff;
+      font-weight: bolder;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <%- content %>
+  <div class="qrcodes">
+    <img style="width: 10rem; height: 10rem" src="https://bucket2023.oss-cn-hangzhou.aliyuncs.com/images/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg" alt="支付宝" width="200" height="200" />
+    <img style="width: 10rem; height: 10rem" src="https://bucket2023.oss-cn-hangzhou.aliyuncs.com/images/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE.jpg" alt="微信收款" width="200" height="200" />
+  </div>
+  <p style="text-align: center; font-size: smaller; color: #777">
+    “觉得不错，买杯奶茶给作者吧”
+  </p>
+  <div id="vcomments"></div>
+  <template id="modal">
+    <div class="modal-mask">
+      <div class="modal-close" id="modal-close">X</div>
     </div>
-    <p style="text-align: center; font-size: smaller; color: #777">
-      “觉得不错，买杯奶茶给作者吧”
-    </p>
-    <div id="vcomments"></div>
-    <script>
-      (() => {
-        new Valine({
-          el: "#vcomments",
-          appId: "iYsqbsZ26zQeQBvytgFgR5bV-gzGzoHsz",
-          appKey: "M9T21EKjPvtdxEvffOOMGsOK",
-        });
-        var view_width = document
-          .getElementsByTagName("html")[0]
-          .getBoundingClientRect().width;
-        var _html = document.getElementsByTagName("html")[0];
-        view_width > 375
-          ? (_html.style.fontSize = 375 / 24 + "px")
-          : (_html.style.fontSize = view_width / 24 + "px");
-        const h1 = document.querySelector("h1");
-        h1.setAttribute(
-          "data-date",
-          document.querySelector(`meta[name='date']`).getAttribute("content")
-        );
-        h1.classList.add("title");
-        // google
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
+  </template>
+  <script>
+    (() => {
+      new Valine({
+        el: "#vcomments",
+        appId: "iYsqbsZ26zQeQBvytgFgR5bV-gzGzoHsz",
+        appKey: "M9T21EKjPvtdxEvffOOMGsOK",
+      });
+      var view_width = document
+        .getElementsByTagName("html")[0]
+        .getBoundingClientRect().width;
+      var _html = document.getElementsByTagName("html")[0];
+      view_width > 375 ?
+        (_html.style.fontSize = 375 / 24 + "px") :
+        (_html.style.fontSize = view_width / 24 + "px");
+      const h1 = document.querySelector("h1");
+      h1.setAttribute(
+        "data-date",
+        document.querySelector(`meta[name='date']`).getAttribute("content")
+      );
+      h1.classList.add("title");
+      // google
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EHZ8V74593");
+
+      hljs.highlightAll();
+
+      const modalContainer = document.querySelector('.modal-mask')
+
+      document.body.addEventListener('click', e => {
+        if (e.target.nodeName === 'IMG') {
+          const modal = document.createElement('div');
+          const modalClose = document.createElement('div');
+          modalClose.classList.add('modal-close')
+          modalClose.innerText = 'X'
+          modalClose.addEventListener('click', () => {
+            document.body.removeChild(modal)
+          }, false)
+          modal.classList.add('modal-mask')
+          modal.append(modalClose)
+          modal.append(e.target.cloneNode(true))
+          document.body.append(modal)
         }
-        gtag("js", new Date());
+      }, false)
 
-        gtag("config", "G-EHZ8V74593");
+    })();
+  </script>
+</body>
 
-        hljs.highlightAll();
-      })();
-    </script>
-  </body>
 </html>

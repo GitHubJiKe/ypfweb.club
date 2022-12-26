@@ -29,25 +29,53 @@
         background-color: #eedeb0;
         background-image: url(https://bucket2023.oss-cn-hangzhou.aliyuncs.com/images/bg.texture.png);
       }
+
       h1 {
         color: brown;
       }
+
       .title::after {
         content: attr(data-date);
         display: block;
         font-size: 0.1rem;
         color: #777;
       }
+
       .qrcodes {
         display: flex;
         gap: 12px;
         margin: 24px;
         justify-content: center;
       }
+
+      .modal-mask {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.6);
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-mask > img {
+        width: 80%;
+        height: 80%;
+        background-color: #fff;
+      }
+
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
+
   <body>
-    <%- content %>
+    <main id="content"><%- content %></main>
     <div class="qrcodes">
       <img
         style="width: 10rem; height: 10rem"
@@ -90,6 +118,7 @@
         h1.classList.add("title");
         // google
         window.dataLayer = window.dataLayer || [];
+
         function gtag() {
           dataLayer.push(arguments);
         }
@@ -98,6 +127,30 @@
         gtag("config", "G-EHZ8V74593");
 
         hljs.highlightAll();
+
+        const modalContainer = document.querySelector(".modal-mask");
+        document.querySelector("#content").addEventListener(
+          "click",
+          (e) => {
+            if (e.target.nodeName === "IMG") {
+              const img = e.target.cloneNode(true);
+              const modal = document.createElement("div");
+              modal.addEventListener(
+                "click",
+                () => {
+                  document.body.removeChild(modal);
+                  document.body.style.overflow = "auto";
+                },
+                false
+              );
+              modal.classList.add("modal-mask");
+              modal.append(img);
+              document.body.append(modal);
+              document.body.style.overflow = "hidden";
+            }
+          },
+          false
+        );
       })();
     </script>
   </body>

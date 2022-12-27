@@ -66,23 +66,13 @@
             e.stopPropagation();
             const src = qrcode.querySelector("img").getAttribute("src");
             if (src) {
-              const img = new Image();
-              img.src = src;
-              img.onload = function () {
-                const canvas = document.createElement("canvas");
-                canvas.width = img.width;
-                canvas.height = img.height;
-                const ctx = canvas.getContext("2d");
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                canvas.toBlob((blob) => {
-                  saveAs(blob, `${document.title}.png`);
-                }, "img/png");
-              };
+              saveAs(src, `${document.title}.png`);
             } else {
               const canvas = qrcode.querySelector("canvas");
-              canvas.toBlob((blob) => {
-                saveAs(blob, `${document.title}.png`);
-              }, "img/png");
+              canvas.toBlob(
+                (blob) => saveAs(blob, `${document.title}.png`),
+                "img/png"
+              );
             }
           } catch (error) {
             console.error(error);

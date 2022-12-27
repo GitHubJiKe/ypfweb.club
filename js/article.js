@@ -62,21 +62,27 @@
       button.addEventListener(
         "click",
         (e) => {
-          e.stopPropagation();
-          const src = qrcode.querySelector("img").getAttribute("src");
-          const img = new Image();
-          img.src = src;
-          img.onload = function () {
-            const canvas = document.createElement("canvas");
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            canvas.toBlob(
-              (blob) => saveAs(blob, `${document.title}.png`),
-              "img/png"
-            );
-          };
+          try {
+            e.stopPropagation();
+            const src = qrcode.querySelector("img").getAttribute("src");
+            console.log("src:::", src);
+            const img = new Image();
+            img.src = src;
+            img.onload = function () {
+              console.log("onload");
+              const canvas = document.createElement("canvas");
+              canvas.width = img.width;
+              canvas.height = img.height;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+              canvas.toBlob((blob) => {
+                console.log("blob:::", blob);
+                saveAs(blob, `${document.title}.png`);
+              }, "img/png");
+            };
+          } catch (error) {
+            console.error(error);
+          }
         },
         false
       );

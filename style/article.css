@@ -1,0 +1,70 @@
+html,
+body {
+  padding: 0 12px;
+  background-color: #eedeb0;
+  background-image: url(https://bucket2023.oss-cn-hangzhou.aliyuncs.com/images/bg.texture.png);
+}
+
+h1 {
+  color: brown;
+}
+
+.title::after {
+  content: attr(data-date);
+  display: block;
+  font-size: 0.1rem;
+  color: #777;
+}
+
+.qrcodes {
+  display: flex;
+  gap: 12px;
+  margin: 24px;
+  justify-content: center;
+}
+
+.modal-mask {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 235ms ease-in-out 0s;
+}
+
+.modal-mask>img {
+  width: auto;
+  height: auto;
+  max-width: 80%;
+  max-height: 80%;
+  background-color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+
+
+.qrcodes>div {
+  width: 10rem;
+  height: 10rem
+}
+
+.shareicon {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url(https://bucket2023.oss-cn-hangzhou.aliyuncs.com/images/share.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  right: 1rem;
+  top: 10%;
+  z-index: 9999;
+  cursor: pointer;
+}

@@ -40,7 +40,13 @@ h1 {
 }
 .modal-mask>div{
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
+}
+.modal-mask>div>button{
+  width: 200px;
+  margin: 12px;
 }
 
 .modal-mask>img {

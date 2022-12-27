@@ -98,4 +98,8 @@
     },
     false
   );
+
+  if (location.search.includes("vconsole=true")) {
+    const vConsole = new window.VConsole();
+  }
 })();

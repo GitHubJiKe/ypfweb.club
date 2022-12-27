@@ -38,6 +38,10 @@ h1 {
   align-items: center;
   transition: opacity 235ms ease-in-out 0s;
 }
+.modal-mask>div{
+  display: flex;
+  flex-direction: column;
+}
 
 .modal-mask>img {
   width: auto;

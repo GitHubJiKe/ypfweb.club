@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang=en><meta charset=UTF-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=date content="2022/12/30 20:00"><title>QRCode.js</title><link rel=stylesheet href=/style/air.css><link rel=stylesheet href=/style/article.css><link rel=stylesheet href=//bucket2023.oss-cn-hangzhou.aliyuncs.com/css/highlight.agate.css><link rel="shortcut icon"href=/favicon.ico type=image/x-icon><script async src="//www.googletagmanager.com/gtag/js?id=G-EHZ8V74593"></script><script async src=//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/qrcode.min.js></script><script async src=//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/FileSaver.min.js></script><script src=//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/Valine.min.js></script><script src=//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/highlight.min.js></script><script src=//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/canvas-toBlob.js></script><script src=//bucket2023.oss-cn-hangzhou.aliyuncs.com/javascript/vconsole.min.js></script><main id=content><h1 id=qrcodejs>QRCode.js</h1><p>今天介绍一个开源库<a href=https://davidshimjs.github.io/qrcodejs/ rel="noopener noreferrer"target=_blank>QRCode.js</a>，该库可以让你非常方便快捷的生成二维码<h2>使用</h2><p>这里推荐使用<a href=https://cdnjs.com/libraries/qrcodejs rel="noopener noreferrer"target=_blank>CDNJS</a>源引入，如下代码<pre><code class="html language-html">&lt;script src="https://cdnjs.com/libraries/qrcodejs">&lt;/script></code></pre><h3 id=-1>基础用法</h3><p>QRCode 是挂在 window 下的一个全局构造函数，可以直接像下面代码那样使用<pre><code class="html language-html">&lt;div id="qrcode">&lt;/div>
+&lt;script type="text/javascript">
+  new QRCode(
+    document.getElementById("qrcode"),
+    "http://jindo.dev.naver.com/collie"
+  );
+&lt;/script></code></pre><p>当然你还可以添加一些配置项<pre><code class="html language-html">&lt;div id="qrcode">&lt;/div>
+&lt;script type="text/javascript">
+  var qrcode = new QRCode(document.getElementById("qrcode"), {
+    text: "http://jindo.dev.naver.com/collie",
+    width: 128,
+    height: 128,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H,
+  });
+&lt;/script></code></pre><p>当然也可以调用 qrcode 下的方法<pre><code class="js language-js">qrcode.clear(); // clear the code.
+qrcode.makeCode("http://naver.com"); // make another code.</code></pre><h3 id=demo>Demo</h3><p class=codepen data-height=300 data-default-tab=html,result data-slug-hash=yLqOjjz data-user=PeterYuan style="height:300px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:2px solid;margin:1em 0;padding:1em"><span>See the Pen <a href=https://codepen.io/PeterYuan/pen/yLqOjjz>Cross-browser QRCode</a> by Peter (<a href=https://codepen.io/PeterYuan>@PeterYuan</a>) on <a href=https://codepen.io>CodePen</a>.</span></p><script async src=https://cpwebassets.codepen.io/assets/embed/ei.js></script></main><div class=shareicon></div><div class=qrcodes><div><img class=zhifubao src=//bucket2023.oss-cn-hangzhou.aliyuncs.com/images/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg alt=支付宝 width=200 height=200> <label style=font-size:small>支付宝</label></div><div><img class=wechat src=//bucket2023.oss-cn-hangzhou.aliyuncs.com/images/%E5%BE%AE%E4%BF%A1%E6%94%B6%E6%AC%BE.jpg alt=微信收款 width=200 height=200> <label style=font-size:small>微信</label></div></div><p style=text-align:center;font-size:smaller;color:#777;margin-top:4rem>“觉得不错，买杯奶茶给作者吧”<div id=vcomments></div><script src=/js/article.js></script>

@@ -53,7 +53,7 @@
     false
   );
 
-  document.querySelector(".shareicon").addEventListener(
+  document.querySelector(".qrcodeicon").addEventListener(
     "click",
     () => {
       const qrcode = document.createElement("div");
@@ -98,7 +98,23 @@
     },
     false
   );
-
+  document.querySelector(".shareicon").addEventListener(
+    "click",
+    () => {
+      document.querySelector("#extra").classList.add("hidden");
+      if (htmlToImage) {
+        htmlToImage
+          .toPng(document.body, {
+            width: window.innerWidth,
+          })
+          .then(function (dataUrl) {
+            saveAs(dataUrl, `${document.title}.png`);
+            document.querySelector("#extra").classList.remove("hidden");
+          });
+      }
+    },
+    false
+  );
   if (location.search.includes("vconsole=true")) {
     const vConsole = new window.VConsole();
   }

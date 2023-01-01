@@ -92,3 +92,10 @@ h1 {
   z-index: 9999;
   cursor: pointer;
 }
+
+iframe {
+  margin-top: 1rem;
+  width: 100%;
+  height: 30rem;
+  border-radius: 1rem;
+}

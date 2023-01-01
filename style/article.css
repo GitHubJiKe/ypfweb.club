@@ -99,3 +99,7 @@ iframe {
   height: 30rem;
   border-radius: 1rem;
 }
+
+::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}

@@ -3,6 +3,7 @@ const fs = require("fs");
 const Path = require("path");
 const util = require("util");
 const ejs = require("ejs");
+const myext = require("./myext");
 const minify = require("html-minifier").minify;
 
 const rf = util.promisify(fs.readFile);
@@ -45,6 +46,7 @@ const showdownOpts = {
   emoji: true,
   backslashEscapesHTMLTags: true,
   metadata: true,
+  extensions: [myext],
 };
 
 const convert = new showdown.Converter(showdownOpts);

@@ -103,3 +103,17 @@ iframe {
 ::-webkit-scrollbar {
   display: none; /* Chrome Safari */
 }
+
+.backicon {
+  position: fixed;
+  left: 1rem;
+  top: 5%;
+  z-index: 9999;
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url(/assets/images/back.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  user-select: none;
+}

@@ -118,4 +118,8 @@
   if (location.search.includes("vconsole=true")) {
     const vConsole = new window.VConsole();
   }
+
+  document.querySelector(".backicon").addEventListener("click", () => {
+    location.href = location.origin;
+  });
 })();
